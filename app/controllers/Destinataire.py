@@ -1,16 +1,20 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from database import Base 
+from sqlalchemy.orm import Session
+from crud.destinataire import ( 
+    create_destinataire,
+    list_destinataire,
+    update_destinataire,
+    delete_destinataire
+)
 
-class Destinataire(Base):
-    __tablename__ = "destinataires"
-    id = Column(Integer, primary_key=True, index=True)
-    nom = Column(String)
-    prenom = Column(String)
-    email = Column(String)
-    telephone = Column(String)
-    adresse = Column(String)
 
-    colis_attendus = relationship("Colis", back_populates="destinataire")
-    colis = relationship("Colis", back_populates="historiques")
+def create_destinataire_service(db:Session,data):
+    return create_destinataire(db,data)
+
+def list_destinataire_service(db:Session):
+    return list_destinataire(db)
+
+def update_destinataire_service(db:Session , destinataire_id : int , data):
+    return update_destinataire(db , destinataire_id , data)
+
+def delete_destinataire_service(db:Session , destinataire_id : int):
+    return delete_destinataire(db , destinataire_id)

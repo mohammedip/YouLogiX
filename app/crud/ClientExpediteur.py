@@ -1,12 +1,12 @@
 from sqlalchemy.orm import Session
-from models.client_expediteur import ClientExpediteur
+from models.ClientExpediteur import ClientExpediteur
 from schemas.client_expediteur import ClientCreate
 
 # -------------------------------
 # CREATE : créer un nouveau client
 # -------------------------------
 def create_client(db: Session, client: ClientCreate):
-    db_client = ClientExpediteur(**client.dict())
+    db_client = ClientExpediteur(**client.model_dump(), statut="créé")
     db.add(db_client)
     db.commit()
     db.refresh(db_client)
@@ -37,7 +37,7 @@ def update_client(db: Session, client_id: int, data: dict):
     client = get_client_by_id(db, client_id)
     if not client:
         return None
-    for key, value in data.items():
+    for key, value in data.model_dump(exclude_unset=True).items():
         setattr(client, key, value)  # met à jour les attributs
     db.commit()
     db.refresh(client)
