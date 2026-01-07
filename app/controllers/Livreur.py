@@ -1,19 +1,15 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from database import Base 
+from sqlalchemy.orm import Session
+from crud.Livreur import ( create_livreur , list_livreurs , update_livreur , delete_livreur)
 
 
-class Livreur(Base):
-    __tablename__ = "livreurs"
-    id = Column(Integer, primary_key=True, index=True)
-    nom = Column(String)
-    prenom = Column(String)
-    telephone = Column(String)
-    vehicule = Column(String) 
-    
-    id_zone = Column(Integer, ForeignKey("zones.id"))
-    
- 
-    zone = relationship("Zone", back_populates="livreurs")
-    colis_assignes = relationship("Colis", back_populates="livreur")
+def create_livreur_service(db:Session , data):
+    return create_livreur(db , data)
+
+def list_livreur_service(db:Session):
+    return list_livreurs(db)
+
+def update_livreur_service(db:Session , livreur_id:int , data):
+    return update_livreur(db, livreur_id , data)
+
+def delete_livreur_service(db:Session , livreur_id:int):
+    return delete_livreur(db , livreur_id)

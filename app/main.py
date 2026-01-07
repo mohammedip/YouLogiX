@@ -1,10 +1,11 @@
-# from fastapi import FastAPI
+from fastapi import FastAPI
+from database import Base, engine
+from routes.colis import router as colis_router
+from routes.livreur import router as livreur_router
 
-# app = FastAPI(title="YouLogiX")
-
-# @app.get("/")
-# def read_root():
-#     return {"message": "YouLogiX API"}
-
-from database import engine, Base
 Base.metadata.create_all(bind=engine)
+
+app = FastAPI(title="YouLogix API")
+
+app.include_router(colis_router)
+app.include_router(livreur_router)

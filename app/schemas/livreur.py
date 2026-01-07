@@ -1,0 +1,27 @@
+from pydantic import BaseModel
+from typing import Optional
+
+class LivreurBase(BaseModel):
+    nom:str
+    prenom:str
+    telephone:str
+    vehicule:str
+    zoneAssignee:str
+
+class LivreurCreate(LivreurBase):
+    pass
+
+class LivreurUpdate(BaseModel):
+    nom:Optional[str] = None
+    prenom:Optional[str] = None
+    telephone:Optional[str] = None
+    vehicule:Optional[str] = None
+    zoneAssignee:Optional[str] = None
+
+
+class LivtreurOut(LivreurBase):
+    id:int
+    
+
+    class Config:
+        orm_mode = True

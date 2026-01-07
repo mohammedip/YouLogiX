@@ -1,19 +1,40 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from database import Base 
+from sqlalchemy.orm import Session
+from models.Livreur import Livreur
+from schemas.livreur import LivreurCreate , LivreurUpdate
 
 
-class Livreur(Base):
-    __tablename__ = "livreurs"
-    id = Column(Integer, primary_key=True, index=True)
-    nom = Column(String)
-    prenom = Column(String)
-    telephone = Column(String)
-    vehicule = Column(String) 
+def create_livreur(db:Session , data:LivreurCreate):
+    livreur = Livreur(**data.model_dump())
+    db.add(livreur)
+    db.commit()
+    db.refresh(livreur)
+    return livreur
+
+
+def list_livreurs(db:Session):
+    return db.query(Livreur).all()
+
+def get_livreur(db:Session , livreur_id:int):
+    return db.query(Livreur).filter(Livreur.id == livreur_id).first()
+
+def update_livreur(db:Session , livreur_id:int , data:LivreurUpdate):
+    livreur = get_livreur(db , livreur_id)
+    if not livreur:
+        return None
     
-    id_zone = Column(Integer, ForeignKey("zones.id"))
+    for field, value in data.model_dump(exclude_unset=True).items():
+        setattr(livreur,field,value)
+
+    db.commit()
+    db.refresh(livreur)
+    return livreur
+
+
+def delete_livreur(db:Session , livreur_id : int):
+    livreur = get_livreur(db, livreur_id)
+    if not livreur:
+        return None
     
- 
-    zone = relationship("Zone", back_populates="livreurs")
-    colis_assignes = relationship("Colis", back_populates="livreur")
+    db.delete(livreur)
+    db.commit()
+    return livreur
