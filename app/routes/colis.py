@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from schemas.colis import ColisCreate, ColisUpdate, ColisOut
@@ -28,14 +28,13 @@ def list_colis(db: Session = Depends(get_db)):
 
 @router.put("/{colis_id}", response_model=ColisOut)
 def update_colis(colis_id: int, data: ColisUpdate, db: Session = Depends(get_db)):
-    colis = update_colis_service(db, colis_id, data)
-    if not colis:
-        raise HTTPException(status_code=404, detail="Colis not found")
-    return colis
+    return update_colis_service(db, colis_id, data)
+
 
 @router.delete("/{colis_id}")
 def delete_colis(colis_id: int, db: Session = Depends(get_db)):
-    colis = delete_colis_service(db, colis_id)
-    if not colis:
-        raise HTTPException(status_code=404, detail="Colis not found")
-    return {"message": "Colis deleted successfully"}
+    return delete_colis_service(db, colis_id)
+
+
+
+   

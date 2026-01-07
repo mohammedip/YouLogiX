@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from fastapi import HTTPException
 from crud.destinataire import ( 
     create_destinataire,
     list_destinataire,
@@ -14,7 +15,17 @@ def list_destinataire_service(db:Session):
     return list_destinataire(db)
 
 def update_destinataire_service(db:Session , destinataire_id : int , data):
-    return update_destinataire(db , destinataire_id , data)
+    destinataire =  update_destinataire(db , destinataire_id , data)
+
+    if not destinataire:
+        raise HTTPException(status_code=404, detail="Destinataire not found")
+    
+    return destinataire
 
 def delete_destinataire_service(db:Session , destinataire_id : int):
-    return delete_destinataire(db , destinataire_id)
+    destinataire =  delete_destinataire(db , destinataire_id)
+
+    if not destinataire:
+        raise HTTPException(status_code=404, detail="Destinataire not found")
+        
+    return {"message": "Destinataire deleted successfully"}
