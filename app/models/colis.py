@@ -29,3 +29,8 @@ class Colis(Base):
     livreur = relationship("Livreur", back_populates="colis_assignes")
     zone = relationship("Zone", back_populates="colis")
     historiques = relationship("HistoriqueStatut", back_populates="colis")
+    historiques = relationship(
+        "HistoriqueStatut",
+        back_populates="colis",
+        cascade="all, delete"
+    )

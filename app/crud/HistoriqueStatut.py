@@ -1,15 +1,18 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from database import Base 
+from sqlalchemy.orm import Session
+from models.historique_statut import HistoriqueStatut
+from schemas.historique_statut import HistoriqueStatutCreate
 
-class HistoriqueStatut(Base):
-    __tablename__ = "historique_statuts"
-    id = Column(Integer, primary_key=True, index=True)
-    id_colis = Column(Integer, ForeignKey("colis.id"))
-    ancien_statut = Column(String)
-    nouveau_statut = Column(String)
-    timestamp = Column(DateTime(timezone=True), server_default=func.now())
-    id_livreur = Column(Integer, ForeignKey("livreurs.id"))
+def create_historique(db: Session, historique: HistoriqueStatutCreate):
+    db_historique = HistoriqueStatut(**historique.dict())
+    db.add(db_historique)
+    db.commit()
+    db.refresh(db_historique)
+    return db_historique
 
-    colis = relationship("Colis", back_populates="historiques")
+def get_historiques_by_colis(db: Session, colis_id: int):
+    return (
+        db.query(HistoriqueStatut)
+        .filter(HistoriqueStatut.id_colis == colis_id)
+        .order_by(HistoriqueStatut.timestamp.desc())
+        .all()
+    )
