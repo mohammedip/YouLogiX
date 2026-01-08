@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from fastapi import HTTPException
 from crud.colis import (
     create_colis,
     list_colis,
@@ -14,7 +15,17 @@ def list_colis_service(db: Session):
     return list_colis(db)
 
 def update_colis_service(db: Session, colis_id: int, data):
-    return update_colis(db, colis_id, data)
+    colis = update_colis(db, colis_id, data)
+    
+    if not colis:
+        raise HTTPException(status_code=404, detail="Colis not found")
+    
+    return colis
 
 def delete_colis_service(db: Session, colis_id: int):
-    return delete_colis(db, colis_id)
+    colis = delete_colis(db, colis_id)
+    
+    if not colis:
+        raise HTTPException(status_code=404, detail="Colis not found")
+        
+    return {"message": "Colis deleted successfully"}

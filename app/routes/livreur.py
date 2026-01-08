@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Depends,HTTPException
+from fastapi import APIRouter,Depends
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from schemas.livreur import LivreurCreate , LivreurUpdate , LivtreurOut
@@ -31,15 +31,10 @@ def list_livreurs(data : LivreurCreate , db:Session=Depends(get_db)):
 
 @router.put("/{livreur_id}" , response_model=LivtreurOut)
 def update_livreur(livreur_id : int , data : LivreurUpdate , db:Session = Depends(get_db)):
-    livreur = update_livreur_service(db , livreur_id , data)
-    if not livreur:
-        raise HTTPException(status_code=404 , detail="Livreur not found")
-    return livreur
+    return update_livreur_service(db , livreur_id , data)
+
 
 
 @router.delete("/{livreur_id}")
 def delete_livreur(livreur_id : int , db : Session = Depends(get_db)):
-    livreur = delete_livreur_service(db , livreur_id)
-    if not livreur:
-        raise HTTPException(status_code=404 , detail="Livreur not found")
-    return {"message": "Livreur deleted successfully"}
+    return delete_livreur_service(db , livreur_id)
