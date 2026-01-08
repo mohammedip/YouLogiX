@@ -23,9 +23,13 @@ class Colis(Base):
     id_destinataire = Column(Integer, ForeignKey("destinataires.id"))
     id_livreur = Column(Integer, ForeignKey("livreurs.id"), nullable=True)
     id_zone = Column(Integer, ForeignKey("zones.id"))
-
     expediteur = relationship("ClientExpediteur", back_populates="colis_envoyes")
     destinataire = relationship("Destinataire", back_populates="colis_attendus")
     livreur = relationship("Livreur", back_populates="colis_assignes")
     zone = relationship("Zone", back_populates="colis")
     historiques = relationship("HistoriqueStatut", back_populates="colis")
+    historiques = relationship(
+        "HistoriqueStatut",
+        back_populates="colis",
+        cascade="all, delete"
+    )
