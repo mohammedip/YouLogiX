@@ -1,4 +1,6 @@
 """Model package exports for YouLogiX."""
+from .ClientExpediteur import ClientExpediteur
+
 
 from .ClientExpediteur import ClientExpediteur
 from .colis import Colis, StatutColis

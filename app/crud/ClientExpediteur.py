@@ -2,8 +2,6 @@ from sqlalchemy.orm import Session
 from models.ClientExpediteur import ClientExpediteur
 from schemas.ClientExpediteur import ClientCreate
 
-# CREATE : créer un nouveau client
-
 def create_client(db: Session, client: ClientCreate):
     db_client = ClientExpediteur(**client.dict())
     db.add(db_client)

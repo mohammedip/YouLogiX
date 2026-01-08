@@ -15,7 +15,8 @@ app = FastAPI(title="YouLogix API")
 app.include_router(colis_router)
 app.include_router(livreur_router)
 
+
 app.include_router(zone_router)
 
-app.include_router(destinataire_router)
+
 
