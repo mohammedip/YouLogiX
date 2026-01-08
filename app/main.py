@@ -17,6 +17,7 @@ app.include_router(livreur_router)
 
 
 app.include_router(zone_router)
+app.include_router(destinataire_router)
 
 
 
