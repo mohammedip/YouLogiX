@@ -1,16 +1,39 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from database import Base 
+from sqlalchemy.orm import Session
+from models.Destinataire import Destinataire
+from schemas.destinataire import DestinataireCreate , DestinataireUpdate
 
-class Destinataire(Base):
-    __tablename__ = "destinataires"
-    id = Column(Integer, primary_key=True, index=True)
-    nom = Column(String)
-    prenom = Column(String)
-    email = Column(String)
-    telephone = Column(String)
-    adresse = Column(String)
 
-    colis_attendus = relationship("Colis", back_populates="destinataire")
-    colis = relationship("Colis", back_populates="historiques")
+def create_destinataire(db:Session , data:DestinataireCreate):
+    destinataire = Destinataire(**data.model_dump(), statut="créé")
+    db.add(destinataire)
+    db.commit()
+    db.refresh(destinataire)
+    return destinataire
+
+def list_destinataire(db:Session):
+    return db.query(Destinataire).all()
+
+def get_destinataire(db:Session,destinataire_id : int):
+    return db.query(Destinataire).filter(Destinataire.id == destinataire_id).first()
+
+def update_destinataire(db : Session,destinataire_id:int , data:DestinataireUpdate):
+    destinataire = get_destinataire(db , destinataire_id)
+    if not destinataire:
+        return None
+    
+    for field , value in data.model_dump(exclude_unset=True).items():
+        setattr(destinataire , field , value)
+
+    db.commit()
+    db.refresh(destinataire)
+    return destinataire
+
+
+def delete_destinataire(db:Session,destinataire_id : int):
+    destinataire = get_destinataire(db , destinataire_id)
+    if not destinataire:
+        return None
+    
+    db.delete(destinataire)
+    db.commit()
+    return destinataire

@@ -1,15 +1,13 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
-from database import Base 
+from sqlalchemy.orm import Session
+from crud.historique_statut import create_historique, get_historiques_by_colis
+from schemas.historique_statut import HistoriqueStatutCreate
 
-class HistoriqueStatut(Base):
-    __tablename__ = "historique_statuts"
-    id = Column(Integer, primary_key=True, index=True)
-    id_colis = Column(Integer, ForeignKey("colis.id"))
-    ancien_statut = Column(String)
-    nouveau_statut = Column(String)
-    timestamp = Column(DateTime(timezone=True), server_default=func.now())
-    id_livreur = Column(Integer, ForeignKey("livreurs.id"))
+class HistoriqueStatutController:
 
-    colis = relationship("Colis", back_populates="historiques")
+    @staticmethod
+    def add(db: Session, historique: HistoriqueStatutCreate):
+        return create_historique(db, historique)
+
+    @staticmethod
+    def list_by_colis(db: Session, colis_id: int):
+        return get_historiques_by_colis(db, colis_id)

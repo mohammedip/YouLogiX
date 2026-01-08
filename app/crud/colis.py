@@ -20,7 +20,7 @@ def update_colis(db: Session, colis_id: int, data: ColisUpdate):
     if not colis:
         return None
 
-    for field, value in data.dict(exclude_unset=True).items():
+    for field, value in data.model_dump(exclude_unset=True).items():
         setattr(colis, field, value)
 
     db.commit()

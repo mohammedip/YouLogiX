@@ -13,3 +13,4 @@ class HistoriqueStatut(Base):
     id_livreur = Column(Integer, ForeignKey("livreurs.id"))
 
     colis = relationship("Colis", back_populates="historiques")
+    
