@@ -11,8 +11,10 @@ class StatutColis(enum.Enum):
     EN_TRANSIT = "en transit"
     LIVRE = "livré"
 
+
 class Colis(Base):
     __tablename__ = "colis"
+
     id = Column(Integer, primary_key=True, index=True)
     description = Column(String)
     poids = Column(Float)
@@ -23,13 +25,23 @@ class Colis(Base):
     id_destinataire = Column(Integer, ForeignKey("destinataires.id"))
     id_livreur = Column(Integer, ForeignKey("livreurs.id"), nullable=True)
     id_zone = Column(Integer, ForeignKey("zones.id"))
-    expediteur = relationship("ClientExpediteur", back_populates="colis_envoyes")
-    destinataire = relationship("Destinataire", back_populates="colis_attendus")
-    livreur = relationship("Livreur", back_populates="colis_assignes")
-    zone = relationship("Zone", back_populates="colis")
-    historiques = relationship("HistoriqueStatut", back_populates="colis")
-    historiques = relationship(
-        "HistoriqueStatut",
-        back_populates="colis",
-        cascade="all, delete"
+
+    expediteur = relationship(
+        "ClientExpediteur",
+        back_populates="colis_envoyes"
     )
+
+    destinataire = relationship("Destinataire", back_populates="colis")
+    historiques = relationship("HistoriqueStatut", back_populates="colis",cascade="all, delete-orphan")
+
+    livreur = relationship(
+        "Livreur",
+        back_populates="colis_assignes"
+    )
+
+    zone = relationship(
+        "Zone",
+        back_populates="colis"
+    )
+
+    

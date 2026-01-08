@@ -13,4 +13,4 @@ class Destinataire(Base):
     adresse = Column(String)
 
     colis_attendus = relationship("Colis", back_populates="destinataire")
-    colis = relationship("Colis", back_populates="historiques")
+    colis = relationship("Colis", back_populates="destinataire")

@@ -4,6 +4,9 @@ services:
   api:
     build: .
     container_name: youexpress_api
+    environment:
+      - PYTHONPATH=/app
+
     ports:
       - "8000:8000"
     env_file:
@@ -11,7 +14,8 @@ services:
     depends_on:
       - db
     volumes:
-      - ./app:/app/app
+      - ./app:/app
+
 
   db:
     image: postgres:15
