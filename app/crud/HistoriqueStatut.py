@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models.historique_statut import HistoriqueStatut
-from schemas.historique_statut import HistoriqueStatutCreate
+from models.HistoriqueStatut import HistoriqueStatut
+from schemas.HistoriqueStatut import HistoriqueStatutCreate
 
 def create_historique(db: Session, historique: HistoriqueStatutCreate):
     db_historique = HistoriqueStatut(**historique.dict())

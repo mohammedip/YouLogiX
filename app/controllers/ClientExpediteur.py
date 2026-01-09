@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 
-from crud import (
+from crud.ClientExpediteur import (
     create_client,
     get_clients,
     get_client_by_id,
@@ -9,7 +9,7 @@ from crud import (
     update_client,
     delete_client
 )
-from schemas import ClientCreate, ClientUpdate
+from schemas.ClientExpediteur import ClientCreate, ClientUpdate
 
 
 class ClientExpediteurController:

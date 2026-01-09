@@ -1,7 +1,7 @@
 from fastapi import APIRouter,Depends
 from sqlalchemy.orm import Session
 from database import SessionLocal
-from schemas.livreur import LivreurCreate , LivreurUpdate , LivtreurOut
+from schemas.livreur import LivreurCreate, LivreurUpdate, LivreurOut
 from controllers.Livreur import (create_livreur_service , list_livreur_service , update_livreur_service , delete_livreur_service)
 
 
@@ -19,17 +19,21 @@ def get_db():
         db.close()
 
 
-@router.post("/",response_model=LivtreurOut)
+@router.post("/",response_model=LivreurOut)
 def create_livreur(data : LivreurCreate , db:Session = Depends(get_db)):
     return create_livreur_service(db , data)
 
 
-@router.get("/", response_model=list[LivtreurOut])
-def list_livreurs(data : LivreurCreate , db:Session=Depends(get_db)):
+
+
+@router.get("/", response_model=list[LivreurOut])
+def list_livreurs(db: Session = Depends(get_db)):
     return list_livreur_service(db)
 
 
-@router.put("/{livreur_id}" , response_model=LivtreurOut)
+
+
+@router.put("/{livreur_id}" , response_model=LivreurOut)
 def update_livreur(livreur_id : int , data : LivreurUpdate , db:Session = Depends(get_db)):
     return update_livreur_service(db , livreur_id , data)
 

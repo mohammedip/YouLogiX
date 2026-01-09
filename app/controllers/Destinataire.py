@@ -13,6 +13,8 @@ def create_destinataire_service(db:Session,data):
 
 def list_destinataire_service(db:Session):
     return list_destinataire(db)
+def list_destinataire_colis_service(db:Session):
+    return list_destinataire(db)
 
 def update_destinataire_service(db:Session , destinataire_id : int , data):
     destinataire =  update_destinataire(db , destinataire_id , data)

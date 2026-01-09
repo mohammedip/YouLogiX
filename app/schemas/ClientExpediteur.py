@@ -1,18 +1,17 @@
-
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 
 
 class ClientBase(BaseModel):
-    nom:str
-    prenom:str
-    email:EmailStr
-    telephone:str
-    adresse:str
+    nom: str
+    prenom: str
+    email: EmailStr
+    telephone: str
+    adresse: str
+
 
 class ClientCreate(ClientBase):
     pass
-
 
 
 class ClientUpdate(BaseModel):
@@ -24,8 +23,7 @@ class ClientUpdate(BaseModel):
 
 
 class ClientResponse(ClientBase):
-    id=int
+    id: int
 
     class Config:
-        orm_mode=True
-
+        from_attributes = True
