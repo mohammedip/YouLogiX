@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from crud.HistoriqueStatut import create_historique, get_historiques_by_colis
-from schemas.HistoriqueStatut import HistoriqueStatutCreate
+from app.crud.HistoriqueStatut import create_historique, get_historiques_by_colis
+from app.schemas.HistoriqueStatut import HistoriqueStatutCreate
 
 class HistoriqueStatutController:
 

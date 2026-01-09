@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
-from models.ClientExpediteur import ClientExpediteur
-from schemas.ClientExpediteur import ClientCreate,ClientUpdate
+from app.models.ClientExpediteur import ClientExpediteur
+from app.schemas.ClientExpediteur import ClientCreate,ClientUpdate
 
 def create_client(db: Session, client: ClientCreate):
-    db_client = ClientExpediteur(**client.dict())
+    db_client = ClientExpediteur(**client.model_dump())
     db.add(db_client)
     db.commit()
     db.refresh(db_client)
@@ -34,12 +34,15 @@ def get_client_by_email(db: Session, email: str):
 
 
 
-def update_client(db, client_id: int, client_update: ClientUpdate):
+def update_client(db, client_id: int, client_update):
     client = get_client_by_id(db, client_id)
     if not client:
         return None
 
-    data = client_update.dict(exclude_unset=True)
+    if hasattr(client_update, 'model_dump'):
+        data = client_update.model_dump(exclude_unset=True)
+    else:
+        data = client_update
 
     for key, value in data.items():
         setattr(client, key, value)

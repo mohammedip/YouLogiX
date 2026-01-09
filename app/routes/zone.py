@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 
-from database import SessionLocal
-from schemas.zone import ZoneCreate, ZoneUpdate, ZoneOut
-from controllers.Zone import (
+from app.database import SessionLocal
+from app.schemas.zone import ZoneCreate, ZoneUpdate, ZoneOut
+from app.controllers.Zone import (
     create_zone_service,
     list_zones_service,
     get_zone_service,

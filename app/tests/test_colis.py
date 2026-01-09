@@ -25,10 +25,11 @@ class TestColisCRUD:
         """Créer un colis"""
         colis_data = {
             **sample_colis_data,
-            "idClientExpediteur": setup_entities["client_id"],
-            "idDestinataire": setup_entities["destinataire_id"],
-            "idZone": setup_entities["zone_id"]
+            "id_expediteur": setup_entities["client_id"],
+            "id_destinataire": setup_entities["destinataire_id"],
+            "id_zone": setup_entities["zone_id"]
         }
+        
         
         response = client.post("/colis/", json=colis_data)
         assert response.status_code == 200
@@ -42,9 +43,9 @@ class TestColisCRUD:
         """Lister les colis"""
         colis_data = {
             **sample_colis_data,
-            "idClientExpediteur": setup_entities["client_id"],
-            "idDestinataire": setup_entities["destinataire_id"],
-            "idZone": setup_entities["zone_id"]
+            "id_expediteur": setup_entities["client_id"],
+            "id_destinataire": setup_entities["destinataire_id"],
+            "id_zone": setup_entities["zone_id"]
         }
         
         client.post("/colis/", json=colis_data)
@@ -60,9 +61,9 @@ class TestColisCRUD:
         """Mettre à jour un colis"""
         colis_data = {
             **sample_colis_data,
-            "idClientExpediteur": setup_entities["client_id"],
-            "idDestinataire": setup_entities["destinataire_id"],
-            "idZone": setup_entities["zone_id"]
+            "id_expediteur": setup_entities["client_id"],
+            "id_destinataire": setup_entities["destinataire_id"],
+            "id_zone": setup_entities["zone_id"]
         }
         
         create_resp = client.post("/colis/", json=colis_data)
@@ -79,9 +80,9 @@ class TestColisCRUD:
         """Supprimer un colis"""
         colis_data = {
             **sample_colis_data,
-            "idClientExpediteur": setup_entities["client_id"],
-            "idDestinataire": setup_entities["destinataire_id"],
-            "idZone": setup_entities["zone_id"]
+            "id_expediteur": setup_entities["client_id"],
+            "id_destinataire": setup_entities["destinataire_id"],
+            "id_zone": setup_entities["zone_id"]
         }
         
         create_resp = client.post("/colis/", json=colis_data)
@@ -98,9 +99,9 @@ class TestColisMetier:
         """Colis créé doit avoir un statut initial"""
         colis_data = {
             **sample_colis_data,
-            "idClientExpediteur": setup_entities["client_id"],
-            "idDestinataire": setup_entities["destinataire_id"],
-            "idZone": setup_entities["zone_id"]
+            "id_expediteur": setup_entities["client_id"],
+            "id_destinataire": setup_entities["destinataire_id"],
+            "id_zone": setup_entities["zone_id"]
         }
         
         response = client.post("/colis/", json=colis_data)
@@ -112,9 +113,9 @@ class TestColisMetier:
         """Mettre à jour le statut d'un colis"""
         colis_data = {
             **sample_colis_data,
-            "idClientExpediteur": setup_entities["client_id"],
-            "idDestinataire": setup_entities["destinataire_id"],
-            "idZone": setup_entities["zone_id"]
+            "id_expediteur": setup_entities["client_id"],
+            "id_destinataire": setup_entities["destinataire_id"],
+            "id_zone": setup_entities["zone_id"]
         }
         
         create_resp = client.post("/colis/", json=colis_data)
@@ -144,9 +145,9 @@ class TestColisErrors:
         """Créer colis avec IDs invalides → 404 ou 400"""
         colis_data = {
             **sample_colis_data,
-            "idClientExpediteur": 99999,
-            "idDestinataire": 99999,
-            "idZone": 99999
+            "id_expediteur": 99999,
+            "id_destinataire": 99999,
+            "id_zone": 99999
         }
         
         response = client.post("/colis/", json=colis_data)

@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Enu
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 import enum
-from database import Base 
+from app.database import Base 
 
 class StatutColis(enum.Enum):
     CREE = "créé"

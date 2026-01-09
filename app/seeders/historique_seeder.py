@@ -1,4 +1,4 @@
-from factories.historique_factory import historique_factory
+from app.factories.historique_factory import historique_factory
 
 def seed_historiques(session, colis_list, livreurs, per_colis: int = 2):
     historiques = []

@@ -1,5 +1,5 @@
 from faker import Faker
-from models.Destinataire import Destinataire
+from app.models.Destinataire import Destinataire
 
 fake = Faker()
 

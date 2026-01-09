@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from database import get_db
-from controllers.ClientExpediteur import ClientExpediteurController
-from schemas.ClientExpediteur import ClientCreate, ClientUpdate, ClientResponse
+from app.database import get_db
+from app.controllers.ClientExpediteur import ClientExpediteurController
+from app.schemas.ClientExpediteur import ClientCreate, ClientUpdate, ClientResponse
 
 router = APIRouter(
     prefix="/clients-expediteurs",

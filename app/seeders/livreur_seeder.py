@@ -1,4 +1,4 @@
-from factories.livreur_factory import livreur_factory
+from app.factories.livreur_factory import livreur_factory
 
 def seed_livreurs(session, zones, per_zone: int = 2):
     livreurs = []

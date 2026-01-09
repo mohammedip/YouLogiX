@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
-from models.HistoriqueStatut import HistoriqueStatut
-from schemas.HistoriqueStatut import HistoriqueStatutCreate
+from app.models.HistoriqueStatut import HistoriqueStatut
+from app.schemas.HistoriqueStatut import HistoriqueStatutCreate
 
 def create_historique(db: Session, historique: HistoriqueStatutCreate):
-    db_historique = HistoriqueStatut(**historique.dict())
+    db_historique = HistoriqueStatut(**historique.model_dump())
     db.add(db_historique)
     db.commit()
     db.refresh(db_historique)

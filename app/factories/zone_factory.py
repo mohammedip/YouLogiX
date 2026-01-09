@@ -1,5 +1,5 @@
 from faker import Faker
-from models.Zone import Zone
+from app.models.Zone import Zone
 
 fake = Faker()
 

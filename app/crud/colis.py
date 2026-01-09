@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
-from models.colis import Colis
-from schemas.colis import ColisCreate, ColisUpdate
+from app.models.colis import Colis, StatutColis
+from app.schemas.colis import ColisCreate, ColisUpdate
 
 def create_colis(db: Session, data: ColisCreate):
-    colis = Colis(**data.model_dump(), statut="créé")
+    colis = Colis(**data.model_dump())
     db.add(colis)
     db.commit()
     db.refresh(colis)

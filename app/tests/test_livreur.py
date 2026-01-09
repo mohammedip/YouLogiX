@@ -14,7 +14,7 @@ class TestLivreurCRUD:
         data = response.json()
         assert data["nom"] == sample_livreur_data["nom"]
         assert data["vehicule"] == sample_livreur_data["vehicule"]
-        assert data["zoneAssignee"] == sample_livreur_data["zoneAssignee"]
+        assert data["id_zone"] == sample_livreur_data["id_zone"]
         assert "id" in data
     
     def test_list_livreurs(self, client, sample_livreur_data):
@@ -32,14 +32,14 @@ class TestLivreurCRUD:
         """✅ Mettre à jour un livreur"""
         create_resp = client.post("/livreurs/", json=sample_livreur_data)
         livreur_id = create_resp.json()["id"]
-        zone_id = create_resp.json()["zoneAssignee"]
+        zone_id = create_resp.json()["id_zone"]
         
         update_data = {"vehicule": "Voiture"}
         response = client.put(f"/livreurs/{livreur_id}", json=update_data)
         assert response.status_code == 200
         data = response.json()
         assert data["vehicule"] == "Voiture"
-        assert data["zoneAssignee"] == zone_id
+        assert data["id_zone"] == zone_id
     
     def test_delete_livreur(self, client, sample_livreur_data):
         """✅ Supprimer un livreur"""

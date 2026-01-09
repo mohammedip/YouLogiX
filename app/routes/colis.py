@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import SessionLocal
-from schemas.colis import ColisCreate, ColisUpdate, ColisOut
-from controllers.colis import (
+from app.database import SessionLocal
+from app.schemas.colis import ColisCreate, ColisUpdate, ColisOut
+from app.controllers.colis import (
     create_colis_service,
     list_colis_service,
     update_colis_service,

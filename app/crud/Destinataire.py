@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import joinedload
-from models.Destinataire import Destinataire
-from schemas.destinataire import DestinataireCreate , DestinataireUpdate
+from app.models.Destinataire import Destinataire
+from app.schemas.destinataire import DestinataireCreate , DestinataireUpdate
 
 
 def create_destinataire(db:Session , data:DestinataireCreate):
-    destinataire = Destinataire(**data.model_dump(), statut="créé")
+    destinataire = Destinataire(**data.model_dump())
     db.add(destinataire)
     db.commit()
     db.refresh(destinataire)

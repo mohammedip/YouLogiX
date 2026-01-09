@@ -1,4 +1,4 @@
-from factories.zone_factory import zone_factory
+from app.factories.zone_factory import zone_factory
 
 def seed_zones(session, count: int = 5):
     zones = []

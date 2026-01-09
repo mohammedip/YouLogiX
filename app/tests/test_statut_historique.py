@@ -13,9 +13,9 @@ def setup_colis(client, sample_client_data, sample_destinataire_data, sample_zon
     
     colis_data = {
         **sample_colis_data,
-        "idClientExpediteur": client_resp.json()["id"],
-        "idDestinataire": dest_resp.json()["id"],
-        "idZone": zone_resp.json()["id"]
+        "id_expediteur": client_resp.json()["id"],
+        "id_destinataire": dest_resp.json()["id"],
+        "id_zone": zone_resp.json()["id"]
     }
     colis_resp = client.post("/colis/", json=colis_data)
     
