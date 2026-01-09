@@ -1,6 +1,16 @@
 from pydantic import BaseModel
 from typing import Optional
 
+from typing import List
+
+class ColisOut(BaseModel):
+    id: int
+    description: str
+
+    class Config:
+        from_attributes = True
+
+
 
 class DestinataireBase(BaseModel):
     nom:str
@@ -22,6 +32,16 @@ class DestinataireUpdate(BaseModel):
 
 class DestinataireOut(DestinataireBase):
     id:int
+
+
+    class Config:
+        from_attributes = True
+
+
+class DestinataireOutSimple(DestinataireBase):
+    id:int
+    colis: List[ColisOut] = [] 
+
 
     class Config:
         from_attributes = True

@@ -1,12 +1,13 @@
 from fastapi import APIRouter , Depends 
 from sqlalchemy.orm import Session
 from database import SessionLocal
-from schemas.destinataire import DestinataireCreate , DestinataireUpdate , DestinataireOut
+from schemas.destinataire import DestinataireCreate , DestinataireUpdate , DestinataireOut,DestinataireOutSimple
 from controllers.Destinataire import (
     create_destinataire_service,
     list_destinataire_service,
     update_destinataire_service,
-    delete_destinataire_service
+    delete_destinataire_service,
+    list_destinataire_colis_service
 )
 
 
@@ -28,6 +29,11 @@ def create_destinataire(data:DestinataireCreate , db:Session = Depends(get_db)):
 @router.get("/" , response_model=list[DestinataireOut])
 def list_destinataires(db : Session = Depends(get_db)):
     return list_destinataire_service(db)
+
+@router.get("/list_destinataires_colis" , response_model=list[DestinataireOutSimple])
+def list_destinataires_colis(db : Session = Depends(get_db)):
+    return list_destinataire_colis_service(db)
+
 
 
 @router.put("/{destinataire_id}" , response_model=DestinataireOut)

@@ -4,10 +4,10 @@ from typing import Optional
 class ColisBase(BaseModel):
     description: str
     poids: float
-    idClientExpediteur: int
-    idDestinataire: int
-    idZone: int
-    villeDestination: str
+    id_expediteur: int
+    id_destinataire: int
+    id_zone: int
+    ville_destination: str
 
 class ColisCreate(ColisBase):
     pass
@@ -15,10 +15,10 @@ class ColisCreate(ColisBase):
 class ColisUpdate(BaseModel):
     description: Optional[str] = None
     poids: Optional[float] = None
-    idClientExpediteur: Optional[int] = None
-    idDestinataire: Optional[int] = None
-    idZone: Optional[int] = None
-    villeDestination: Optional[str] = None
+    id_expediteur: Optional[int] = None
+    id_destinataire: Optional[int] = None
+    id_zone: Optional[int] = None
+    ville_destination: Optional[str] = None
     statut: Optional[str] = None
 
 class ColisOut(ColisBase):

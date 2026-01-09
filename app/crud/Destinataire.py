@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import joinedload
 from models.Destinataire import Destinataire
 from schemas.destinataire import DestinataireCreate , DestinataireUpdate
 
@@ -37,3 +38,6 @@ def delete_destinataire(db:Session,destinataire_id : int):
     db.delete(destinataire)
     db.commit()
     return destinataire
+
+def list_destinataire_colis(db:Session):
+    return db.query(Destinataire).options(joinedload(Destinataire.colis)).all()

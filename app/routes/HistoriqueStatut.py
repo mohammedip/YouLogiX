@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import get_db
-from controllers.historique_statut import HistoriqueStatutController
-from schemas.historique_statut import (
+from database import SessionLocal
+from controllers.HistoriqueStatut import HistoriqueStatutController
+from schemas.HistoriqueStatut import (
     HistoriqueStatutCreate,
     HistoriqueStatutResponse
 )
@@ -11,6 +11,12 @@ router = APIRouter(
     prefix="/historiques-statuts",
     tags=["Historique Statut"]
 )
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @router.post("/", response_model=HistoriqueStatutResponse)
 def create_historique(
