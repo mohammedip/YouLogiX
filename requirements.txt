@@ -6,6 +6,9 @@ pydantic
 pydantic-settings
 python-dotenv
 pytest
+pytest-cov
+httpx
 alembic
 Faker
 email-validator
+
