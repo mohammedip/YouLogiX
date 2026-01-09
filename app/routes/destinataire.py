@@ -1,8 +1,8 @@
 from fastapi import APIRouter , Depends 
 from sqlalchemy.orm import Session
-from database import SessionLocal
-from schemas.destinataire import DestinataireCreate , DestinataireUpdate , DestinataireOut,DestinataireOutSimple
-from controllers.Destinataire import (
+from app.database import SessionLocal
+from app.schemas.destinataire import DestinataireCreate , DestinataireUpdate , DestinataireOut,DestinataireOutSimple
+from app.controllers.Destinataire import (
     create_destinataire_service,
     list_destinataire_service,
     update_destinataire_service,

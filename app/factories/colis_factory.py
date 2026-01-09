@@ -1,6 +1,6 @@
 from faker import Faker
 import random
-from models.colis import Colis, StatutColis
+from app.models.colis import Colis, StatutColis
 
 fake = Faker()
 

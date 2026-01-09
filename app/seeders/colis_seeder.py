@@ -1,4 +1,4 @@
-from factories.colis_factory import colis_factory
+from app.factories.colis_factory import colis_factory
 
 def seed_colis(session, expediteurs, destinataires, livreurs, zones, count: int = 20):
     colis_list = []

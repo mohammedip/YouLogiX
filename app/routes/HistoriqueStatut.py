@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import SessionLocal
-from controllers.HistoriqueStatut import HistoriqueStatutController
-from schemas.HistoriqueStatut import (
+from app.database import SessionLocal
+from app.controllers.HistoriqueStatut import HistoriqueStatutController
+from app.schemas.HistoriqueStatut import (
     HistoriqueStatutCreate,
     HistoriqueStatutResponse
 )

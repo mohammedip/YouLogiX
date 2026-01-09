@@ -1,10 +1,10 @@
-from database import SessionLocal, engine, Base
-from seeders.client_expediteur_seeder import seed_clients_expediteurs
-from seeders.zone_seeder import seed_zones
-from seeders.livreur_seeder import seed_livreurs
-from seeders.destinataire_seeder import seed_destinataires
-from seeders.colis_seeder import seed_colis
-from seeders.historique_seeder import seed_historiques
+from app.database import SessionLocal, engine, Base
+from app.seeders.client_expediteur_seeder import seed_clients_expediteurs
+from app.seeders.zone_seeder import seed_zones
+from app.seeders.livreur_seeder import seed_livreurs
+from app.seeders.destinataire_seeder import seed_destinataires
+from app.seeders.colis_seeder import seed_colis
+from app.seeders.historique_seeder import seed_historiques
 
 
 def run_all():

@@ -1,4 +1,4 @@
-from factories.destinataire_factory import destinataire_factory
+from app.factories.destinataire_factory import destinataire_factory
 
 def seed_destinataires(session, count: int = 10):
     destinataires = []

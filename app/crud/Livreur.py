@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
-from models.Livreur import Livreur
-from schemas.livreur import LivreurCreate , LivreurUpdate
+from app.models.Livreur import Livreur
+from app.schemas.livreur import LivreurCreate , LivreurUpdate
 
 
 def create_livreur(db:Session , data:LivreurCreate):
-    livreur = Livreur(**data.model_dump(), statut="créé")
+    livreur = Livreur(**data.model_dump())
     db.add(livreur)
     db.commit()
     db.refresh(livreur)

@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 
 from sqlalchemy.sql import func
 
-from database import Base 
+from app.database import Base 
 
 
 class Zone(Base):

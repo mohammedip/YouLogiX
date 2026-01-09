@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 
-from crud.ClientExpediteur import (
+from app.crud.ClientExpediteur import (
     create_client,
     get_clients,
     get_client_by_id,
@@ -9,7 +9,7 @@ from crud.ClientExpediteur import (
     update_client,
     delete_client
 )
-from schemas.ClientExpediteur import ClientCreate, ClientUpdate
+from app.schemas.ClientExpediteur import ClientCreate, ClientUpdate
 
 
 class ClientExpediteurController:
@@ -39,7 +39,7 @@ class ClientExpediteurController:
 
     @staticmethod
     def update(db: Session, client_id: int, data: ClientUpdate):
-        client = update_client(db, client_id, data.dict(exclude_unset=True))
+        client = update_client(db, client_id, data.model_dump(exclude_unset=True))
         if not client:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,

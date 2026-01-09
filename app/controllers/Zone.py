@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from crud.Zone import (create_zone,list_zones,get_zone,get_zone_by_name,get_zone_by_code_postal,update_zone,delete_zone)
+from app.crud.Zone import (create_zone,list_zones,get_zone,get_zone_by_name,get_zone_by_code_postal,update_zone,delete_zone)
 def create_zone_service(db: Session, data):
     return create_zone(db, data)
 

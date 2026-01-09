@@ -1,6 +1,6 @@
 from faker import Faker
 from datetime import datetime
-from models.HistoriqueStatut import HistoriqueStatut
+from app.models.HistoriqueStatut import HistoriqueStatut
 
 fake = Faker()
 

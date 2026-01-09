@@ -100,7 +100,7 @@ def sample_livreur_data(db_session):
         "prenom": "Paul",
         "telephone": "0645678912",
         "vehicule": "Moto",
-        "zoneAssignee": zone.id
+        "id_zone": zone.id
     }
 
 
@@ -118,5 +118,5 @@ def sample_colis_data():
     return {
         "description": "Colis fragile - Electronique",
         "poids": 2.5,
-        "villeDestination": "Lyon"
+        "ville_destination": "Lyon"
     }

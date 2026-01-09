@@ -1,6 +1,6 @@
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String
-from database import Base
+from app.database import Base
 
 class ClientExpediteur(Base):
     __tablename__ = "clients"
