@@ -3,7 +3,7 @@ from models.Zone import Zone
 from schemas.zone import ZoneCreate, ZoneUpdate
 
 def create_zone(db: Session, data: ZoneCreate):
-    zone = Zone(**data.model_dump())
+    zone = Zone(**data.model_dump(), statut="créé")
     db.add(zone)
     db.commit()
     db.refresh(zone)
